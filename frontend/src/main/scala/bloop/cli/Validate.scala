@@ -86,17 +86,18 @@ object Validate {
       state.build.origin.isDirectory &&
       state.build.origin != Environment.defaultBloopDirectory
     ) {
-      state.build.traces match {
-        case Nil => Task.now(state)
-        case x :: xs =>
-          Task.now {
-            xs.foldLeft(report(Feedback.reportRecursiveTrace(x))) {
-              case (_, trace) => report(Feedback.reportRecursiveTrace(trace))
-            }
-
-            state.mergeStatus(ExitStatus.BuildDefinitionError)
-          }
-      }
+      Task.now(state)
+      // state.build.traces match {
+      //   case Nil => Task.now(state)
+      //   case x :: xs =>
+      //     Task.now {
+      //       xs.foldLeft(report(Feedback.reportRecursiveTrace(x))) {
+      //         case (_, trace) => report(Feedback.reportRecursiveTrace(trace))
+      //       }
+      //
+      //       state.mergeStatus(ExitStatus.BuildDefinitionError)
+      //     }
+      // }
     } else {
       Task.now {
         report(Feedback.missingConfigDirectory(configDirectory))

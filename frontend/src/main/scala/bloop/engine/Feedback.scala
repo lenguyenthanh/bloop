@@ -21,13 +21,13 @@ object Feedback {
   def missingInstanceForJavaCompilation(project: Project): String =
     s"Failed to compile Java sources in ${project.name}: default Zinc Scala instance couldn't be created!"
 
-  def reportRecursiveTrace(trace: RecursiveTrace): String = {
-    trace.visited.headOption match {
-      case Some(initialProject) =>
-        s"Fatal recursive dependency detected in '${initialProject}': ${trace.visited}"
-      case None => "The build has an undefined recursive trace. Please, report upstream."
-    }
-  }
+  // def reportRecursiveTrace(trace: RecursiveTrace): String = {
+  //   trace.visited.headOption match {
+  //     case Some(initialProject) =>
+  //       s"Fatal recursive dependency detected in '${initialProject}': ${trace.visited}"
+  //     case None => "The build has an undefined recursive trace. Please, report upstream."
+  //   }
+  // }
 
   def detectMissingDependencies(projectName: String, missing: List[String]): Option[String] = {
     missing match {
